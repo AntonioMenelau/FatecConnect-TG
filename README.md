@@ -39,7 +39,7 @@ fatecconnect/
 
 1. **Clone o repositório:**
    ```sh
-   git clone https://github.com/yourusername/FatecConnect.git
+   git clone https://github.com/AntonioMenelau/FatecConnect-TG.git
    cd FatecConnect
    ```
 
