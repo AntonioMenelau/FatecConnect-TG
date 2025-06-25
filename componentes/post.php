@@ -29,3 +29,17 @@ function getPostById($postId) {
     
     return fetchOne($sql, [$postId]);
 }
+
+/**
+ * Busca posts pelo título (com paginação)
+ */
+function searchPostsByTitle($search, $limit = 10, $offset = 0) {
+    $sql = "SELECT p.*, u.name as author_name, u.user_type, u.profile_picture, 
+                   (SELECT COUNT(*) FROM comments WHERE post_id = p.id) as comment_count
+            FROM posts p
+            JOIN users u ON p.user_id = u.id
+            WHERE p.title LIKE ?
+            ORDER BY p.created_at DESC
+            LIMIT ? OFFSET ?";
+    return fetchAll($sql, ["%$search%", $limit, $offset]);
+}

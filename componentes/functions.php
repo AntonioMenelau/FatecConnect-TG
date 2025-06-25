@@ -62,3 +62,18 @@ function displayMessage() {
         unset($_SESSION['message_type']);
     }
 }
+
+/**
+ * Destaca o termo de busca no texto (case-insensitive)
+ */
+function highlightSearchTerm($text, $search) {
+    if (empty($search)) return htmlspecialchars($text);
+    $escapedSearch = preg_quote($search, '/');
+    return preg_replace_callback(
+        "/($escapedSearch)/i",
+        function ($matches) {
+            return '<span class="bg-yellow-200 font-bold">' . htmlspecialchars($matches[0]) . '</span>';
+        },
+        htmlspecialchars($text)
+    );
+}
