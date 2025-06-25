@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once __DIR__ . '/../includes/config.php';
 
 // Caminho do banco SQLite
 define('SQLITE_PATH', __DIR__ . '/../fatecconnect.sqlite');

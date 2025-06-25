@@ -7,7 +7,7 @@ define('DB_NAME', 'fatecconnect');
 
 // Configurações da aplicação
 define('SITE_NAME', 'FatecConnect');
-define('SITE_URL', 'https://fatecconnect.nxstech.com.br/');
+define('SITE_URL', 'http://localhost/FatecConnect/');
 
 // Tipos de usuário
 define('USER_STUDENT', 1);
@@ -18,36 +18,10 @@ define('USER_ADMIN', 4);
 // Configurações de sessão
 session_start();
 
-// Função para verificar se usuário está logado
-function isLoggedIn() {
-    return isset($_SESSION['user_id']);
-}
 
-// Função para redirecionar
-function redirect($location) {
-    header("Location: " . SITE_URL . $location);
-    exit;
-}
-
-// Função para exibir mensagens
-function setMessage($message, $type = 'success') {
-    $_SESSION['message'] = $message;
-    $_SESSION['message_type'] = $type;
-}
-
-function displayMessage() {
-    if(isset($_SESSION['message'])) {
-        $message = $_SESSION['message'];
-        $type = $_SESSION['message_type'];
-        
-        echo "<div class='bg-" . ($type == 'success' ? 'green' : 'red') . "-100 border-l-4 border-" . 
-             ($type == 'success' ? 'green' : 'red') . "-500 text-" . 
-             ($type == 'success' ? 'green' : 'red') . "-700 p-4 mb-4' role='alert'>";
-        echo "<p>" . $message . "</p>";
-        echo "</div>";
-        
-        // Limpar a mensagem
-        unset($_SESSION['message']);
-        unset($_SESSION['message_type']);
-    }
-}
+// imports de todos os componentes
+require_once __DIR__ . '/../componentes/db.php';  
+require_once __DIR__ . '/../componentes/usuario.php';
+require_once __DIR__ . '/../componentes/post.php';
+require_once __DIR__ . '/../componentes/comentario.php';
+require_once __DIR__ . '/../componentes/functions.php';

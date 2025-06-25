@@ -1,6 +1,5 @@
 <?php
-require_once '../includes/db.php';
-require_once '../includes/functions.php';
+require_once '../includes/config.php';
 
 // Verifica se é admin
 if (!isLoggedIn() || $_SESSION['user_type'] !== 4) {
@@ -62,7 +61,7 @@ require_once '../includes/header.php';
 <script>
 function deletePost(postId) {
     if (confirm('Tem certeza que deseja excluir este post?')) {
-        fetch(`../includes/delete-post.php?id=${postId}`, {
+        fetch(`pages/delete-post.php?id=${postId}`, {
             method: 'DELETE'
         })
         .then(response => response.json())

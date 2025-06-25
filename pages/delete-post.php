@@ -1,6 +1,6 @@
 <?php
-require_once 'db.php';
-require_once 'functions.php';
+
+require_once '../includes/config.php';
 
 session_start();
 
