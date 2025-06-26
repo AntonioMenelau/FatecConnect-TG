@@ -66,7 +66,7 @@
         <mxCell id="oCv998W_JMqjDXVk1AhT-11" value="&amp;lt;extends&amp;gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="35" y="404" width="80" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="WDEe-NjsPmFSdlKp4_de-1" value="Visualizar Métricas de Conta" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="WDEe-NjsPmFSdlKp4_de-1" value="&lt;span style=&quot;line-height: 115%; font-family: Arial, sans-serif;&quot;&gt;&lt;font&gt;Visualizar Estatísticas&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;line-height: 115%; font-family: Arial, sans-serif;&quot;&gt;&lt;font&gt;da Plataforma&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-40" y="257" width="140" height="60" as="geometry" />
         </mxCell>
       </root>
