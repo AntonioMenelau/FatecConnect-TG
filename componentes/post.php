@@ -43,3 +43,48 @@ function searchPostsByTitle($search, $limit = 10, $offset = 0) {
             LIMIT ? OFFSET ?";
     return fetchAll($sql, ["%$search%", $limit, $offset]);
 }
+
+/**
+ * Obtém os posts mais recentes para moderação (sem filtro de status)
+ */
+function getRecentPostsForModeration($limit = 10) {
+    $sql = "SELECT p.id, p.title, p.content, p.created_at, u.name as author_name, u.profile_picture
+            FROM posts p
+            JOIN users u ON p.user_id = u.id
+            ORDER BY p.created_at DESC
+            LIMIT ?";
+    return fetchAll($sql, [$limit]);
+}
+
+/**
+ * Obtém posts mais comentados no período
+ */
+function getMostCommentedPosts($startDate = null, $endDate = null, $limit = 5) {
+    $whereClause = '';
+    $params = [];
+    
+    if ($startDate && $endDate) {
+        $whereClause = "AND DATE(p.created_at) BETWEEN ? AND ?";
+        $params = [$startDate, $endDate];
+    }
+    
+    $sql = "SELECT 
+                p.id,
+                p.title,
+                p.created_at,
+                u.name as author_name,
+                u.user_type,
+                COUNT(c.id) as comments_count
+            FROM posts p
+            JOIN users u ON p.user_id = u.id
+            LEFT JOIN comments c ON p.id = c.post_id
+            WHERE 1=1 $whereClause
+            GROUP BY p.id, p.title, p.created_at, u.name, u.user_type
+            ORDER BY comments_count DESC, p.created_at DESC
+            LIMIT ?";
+    
+    $params[] = $limit;
+    
+    return fetchAll($sql, $params);
+}
+

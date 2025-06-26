@@ -63,3 +63,43 @@ function getUserTypeLabel($userType) {
 function isLoggedIn() {
     return isset($_SESSION['user_id']);
 }
+
+/**
+ * Obtém estatísticas de atividade (posts e comentários) por tipo de usuário no período
+ */
+function getUserActivityStatsByType($startDate = null, $endDate = null) {
+    $types = [
+        'students' => USER_STUDENT,
+        'alumni' => USER_ALUMNI,
+        'professors' => USER_PROFESSOR,
+        'admins' => USER_ADMIN
+    ];
+    $result = [];
+    foreach ($types as $label => $type) {
+        // Posts
+        $sqlPosts = "SELECT COUNT(*) as total FROM posts WHERE user_id IN (SELECT id FROM users WHERE user_type = ?)";
+        $paramsPosts = [$type];
+        if ($startDate && $endDate) {
+            $sqlPosts .= " AND DATE(created_at) BETWEEN ? AND ?";
+            $paramsPosts[] = $startDate;
+            $paramsPosts[] = $endDate;
+        }
+        $posts = fetchOne($sqlPosts, $paramsPosts)['total'];
+
+        // Comentários
+        $sqlComments = "SELECT COUNT(*) as total FROM comments WHERE user_id IN (SELECT id FROM users WHERE user_type = ?)";
+        $paramsComments = [$type];
+        if ($startDate && $endDate) {
+            $sqlComments .= " AND DATE(created_at) BETWEEN ? AND ?";
+            $paramsComments[] = $startDate;
+            $paramsComments[] = $endDate;
+        }
+        $comments = fetchOne($sqlComments, $paramsComments)['total'];
+
+        $result[$label] = [
+            'posts' => $posts,
+            'comments' => $comments
+        ];
+    }
+    return $result;
+}
