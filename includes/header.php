@@ -104,7 +104,6 @@
                     <a href="<?= SITE_URL ?>pages/create-post.php" class="hover:text-yellow-300">
                         <i class="fas fa-plus-circle"></i> Novo Post
                     </a>
-                    <?php endif; ?>
                     <div class="relative">
                         <button onclick="toggleDropdown()" class="flex items-center hover:text-yellow-300">
                             <?php if ($_SESSION['profile_picture']): ?>
@@ -123,6 +122,7 @@
                             <a href="<?= SITE_URL ?>pages/manage-posts.php" class="block px-4 py-2 hover:bg-gray-100">
                                 <i class="fas fa-tasks mr-2"></i> Gerenciar Posts
                             </a>
+                            <?php endif; ?>
                             <?php if (isLoggedIn() && $_SESSION['user_type'] === 4): ?>
                             <a href="<?= SITE_URL ?>pages/estatisticas.php" class="block px-4 py-2 hover:bg-gray-100">
                                 <i class="fas fa-chart-bar"></i> Estatísticas
